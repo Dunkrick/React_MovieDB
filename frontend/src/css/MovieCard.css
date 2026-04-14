@@ -1,0 +1,252 @@
+/* ===================================================
+   Movie Card
+   HCI Principles:
+   • Feedback: hover lift + shadow + overlay reveal
+   • Affordance: button clearly looks clickable
+   • Progressive Disclosure: overlay details on hover
+   • Aesthetic-Usability: polished card design
+   • Figure/Ground (Gestalt): card separated from bg
+   =================================================== */
+
+.movie-card {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all var(--transition-slow);
+}
+
+.movie-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-light);
+}
+
+/* — Poster — */
+.movie-poster {
+    position: relative;
+    aspect-ratio: 2/3;
+    width: 100%;
+    overflow: hidden;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.movie-card:hover .movie-poster img {
+    transform: scale(1.08);
+}
+
+/* — Overlay (Progressive Disclosure) — */
+.movie-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg,
+            transparent 0%,
+            transparent 40%,
+            rgba(10, 10, 15, 0.7) 70%,
+            rgba(10, 10, 15, 0.95) 100%);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.25rem;
+}
+
+.movie-card:hover .movie-overlay {
+    opacity: 1;
+}
+
+/* — Favorite Button (Affordance + Feedback) — */
+.favorite-button {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    font-size: 1.3rem;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 10, 15, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    z-index: 2;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.movie-card:hover .favorite-button {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.favorite-button:hover {
+    background: rgba(229, 9, 20, 0.7);
+    border-color: var(--accent);
+    transform: scale(1.15) !important;
+}
+
+.favorite-button:active {
+    transform: scale(0.95) !important;
+}
+
+.favorite-button.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* — Movie Info — */
+.movie-info {
+    padding: 0.85rem 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    background: var(--bg-card);
+}
+
+.movie-info h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-primary);
+    line-height: 1.3;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+}
+
+.movie-info p {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+/* — Rating — */
+.user-rating {
+    color: #ffd700;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: auto;
+}
+
+.rating-select {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+    padding: 0.4rem 0.6rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    transition: border-color var(--transition-fast);
+}
+
+.rating-select:hover {
+    border-color: var(--accent);
+}
+
+/* — Responsive — */
+@media (max-width: 768px) {
+    .movie-card {
+        font-size: 0.9rem;
+    }
+
+    .movie-info {
+        padding: 0.65rem 0.75rem;
+    }
+
+    .movie-info h3 {
+        font-size: 0.8rem;
+    }
+
+    .favorite-button {
+        width: 34px;
+        height: 34px;
+        font-size: 1.1rem;
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* — Card Entry Animation — */
+@keyframes cardReveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.movies-grid>.movie-card {
+    animation: cardReveal 0.4s ease-out both;
+}
+
+.movies-grid>.movie-card:nth-child(1) {
+    animation-delay: 0.03s;
+}
+
+.movies-grid>.movie-card:nth-child(2) {
+    animation-delay: 0.06s;
+}
+
+.movies-grid>.movie-card:nth-child(3) {
+    animation-delay: 0.09s;
+}
+
+.movies-grid>.movie-card:nth-child(4) {
+    animation-delay: 0.12s;
+}
+
+.movies-grid>.movie-card:nth-child(5) {
+    animation-delay: 0.15s;
+}
+
+.movies-grid>.movie-card:nth-child(6) {
+    animation-delay: 0.18s;
+}
+
+.movies-grid>.movie-card:nth-child(7) {
+    animation-delay: 0.21s;
+}
+
+.movies-grid>.movie-card:nth-child(8) {
+    animation-delay: 0.24s;
+}
+
+.movies-grid>.movie-card:nth-child(9) {
+    animation-delay: 0.27s;
+}
+
+.movies-grid>.movie-card:nth-child(10) {
+    animation-delay: 0.30s;
+}

@@ -1,0 +1,122 @@
+/* ===================================================
+   Home Page
+   HCI Principles:
+   • Visibility of System Status: loading/error states
+   • Aesthetic-Usability: polished search bar experience
+   • Proximity (Gestalt): search + results visual grouping
+   • Fitts's Law: large search input target area
+   =================================================== */
+
+.home {
+  padding: 2.5rem 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* — Search Form — */
+.search-form {
+  max-width: 680px;
+  margin: 0 auto 3rem;
+  display: flex;
+  gap: 0;
+  position: relative;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.search-form:focus-within {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm), 0 0 0 3px var(--accent-soft);
+}
+
+.search-input {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 400;
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-button {
+  padding: 1rem 2rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.search-button:hover {
+  background: var(--accent-hover);
+  border-color: transparent;
+}
+
+.search-button:active {
+  transform: none;
+  background: #cc0812;
+}
+
+/* — Movies Grid — */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 0 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* — Responsive — */
+@media (max-width: 768px) {
+  .home {
+    padding: 1.5rem 1rem;
+  }
+
+  .search-form {
+    margin-bottom: 2rem;
+  }
+
+  .search-input {
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .search-button {
+    padding: 0.85rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .movies-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+}

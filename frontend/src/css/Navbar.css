@@ -1,0 +1,116 @@
+/* ===================================================
+   Navbar
+   HCI Principles:
+   • Consistency: sticky, always accessible
+   • Recognition > Recall: clear labels + active indicator
+   • Fitts's Law: generous click targets
+   • Feedback: hover/active states
+   • Proximity (Gestalt): grouped nav links
+   • Alignment: navbar content aligns with page content
+   =================================================== */
+
+/* Outer bar — full width background + blur */
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(10, 10, 15, 0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Inner container — aligned with main-content width */
+.navbar-container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* — Brand — */
+.navbar-brand a {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--accent) 0%, #ff6b6b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+.navbar-brand a:hover {
+  opacity: 0.85;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* — Nav Links — */
+.navbar-links {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.5rem 1.15rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary) !important;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--text-primary) !important;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Active state with accent underline */
+.nav-link.active {
+  color: var(--text-primary) !important;
+  background: var(--accent-soft);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+/* — Responsive — */
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 1rem;
+    height: 56px;
+  }
+
+  .navbar-brand a {
+    font-size: 1.15rem;
+  }
+
+  .navbar-links {
+    gap: 0.25rem;
+  }
+
+  .nav-link {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+  }
+}
